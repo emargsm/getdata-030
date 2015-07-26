@@ -9,8 +9,8 @@ As part of the "Getting and Cleaning Data" course offered by Coursera, all stude
 For this project, I have written a script named run_analysis.R that performs these steps. The following sections will describe the script in more detail.
 
 ## Quick Start
-Put the run_analysis.R script into the same directory where you have unzipped the [source data](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip). The folder "UCI Har Dataset" and the script run_analysis.R should be on the same level.
-Because the script itself contains a call to the main() function within the file, simply sourcing should be sufficient to run the tidying and analysis. However, an explicit main() might be necessary.
+Put the run_analysis.R script into the same directory where you have unzipped the [source data](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip). The folder "UCI Har Dataset" and the script run_analysis.R should be on the same level.  
+Because the script itself contains a call to the main() function within the file, simply sourcing should be sufficient to run the tidying and analysis. However, an explicit main() might be necessary.  
 After the script has finished, the final tidy dataset will be in a file called "final_tidy.txt" under the "UCI Har Dataset" folder.
 ## Explanation
 ### Assumptions

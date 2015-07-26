@@ -114,7 +114,7 @@ complete_set <- function(base_dir = getwd(), curr_set = "test", my_environment) 
         
         ## Return to the original location
         
-        print(paste(c("Going back to",base_dir),sep=" ",collapse=' '))
+        print(paste(c("Done processing the",curr_set,"set."),sep=" ",collapse=' '))
         setwd(base_dir)
         
         
@@ -150,19 +150,22 @@ main <- function() {
         ## Use start_prep to set everything up.
         ## Then store the basic info (current dir, base dir, etc.)
         
+        print("Starting the script.")
+        
         environment_setup <- start_prep()
         my_dir <- environment_setup$get_dir()
         my_base <- environment_setup$get_base()
         features <- environment_setup$get_features()
         activities <- environment_setup$get_activities()
        
-        #print(paste("Currently in this directory:",my_dir))
+        
         
         
         ## Tidy up the test & training data.
         ## Add the activity code, activity name, and subject columns.
         
         #print("Finalising the test data set.")
+        print("Starting the data processing.")
         tidy_test <- complete_set(base_dir = my_base, curr_set = "test", environment_setup)
         
         #print("Finalising the training data set.")
@@ -208,10 +211,18 @@ main <- function() {
         ## In this case, we want to keep our data wide, but we want to iterate
         ## over the activity name and subject number.
         
+        print("Finalising our data before writing the output.")
         melt_measures <- melt(uncast_measures,id.vars = c("activity","subject"))
         tidy_means <- dcast(melt_measures, subject + activity ~ variable, mean)
         
         ## Now write the finalised tidy data to the current directory.
+        ## Go ahead and clean the measurement names first.
+        clean_names <- names(tidy_means[,3:68])
+        clean_names <- gsub('()','',clean_names,fixed=TRUE)
+        clean_names <- gsub('-','.',clean_names,fixed=TRUE)
+        
+        names(tidy_means) <- c("subject", "activity", clean_names)
+        
         write.table(tidy_means, file="final_tidy.txt", row.names = FALSE)
         
         
